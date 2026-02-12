@@ -1,0 +1,198 @@
+
+<!-- voting.html -->
+<div class="flex justify-center gap-4 mb-8">
+  <button routerLink="/add-party"
+          class="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-xl font-bold">
+    🧑‍💻 Add Party
+  </button>
+
+  <button routerLink="/add-candidate"
+          class="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-xl font-bold">
+    ➕ Add Candidate
+  </button>
+
+  <button routerLink="/add-voter"
+          class="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded-xl font-bold">
+    🧑‍💻 Add Voter
+  </button>
+</div>
+
+<section class="bg-[#1c1b1b] text-white min-h-screen py-10 px-6">
+
+  <div class="max-w-6xl mx-auto text-center mb-8">
+    <h1 class="text-4xl font-bold text-orange-500 mb-4">🗳️ Cast Your Vote</h1>
+    <p class="text-gray-400">Select your voter and candidate.</p>
+  </div>
+
+  <!-- =======================
+       VOTER SEARCH + CARDS
+  ======================= -->
+  <div class="max-w-6xl mx-auto mb-6">
+    <h2 class="text-2xl text-orange-400 font-bold mb-3">Voters</h2>
+
+    <!-- Search -->
+    <input type="text"
+           [(ngModel)]="voterSearch"
+           (input)="filterVoters()"
+           placeholder="Search voter by name..."
+           class="w-full md:w-1/2 mb-4 p-2 rounded bg-gray-800 border border-orange-600 text-white">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+      <div *ngFor="let voter of paginatedVoters"
+           (click)="onVoterSelect(voter.id)"
+           [class.border-orange-500]="selectedVoterId === voter.id"
+           class="bg-gray-900 p-5 rounded-xl border border-orange-700 hover:border-orange-500
+                  hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 cursor-pointer group relative">
+
+        <!-- Delete -->
+        <button (click)="onDeleteVoter(voter.id); $event.stopPropagation()"
+                class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm shadow">
+          Delete
+        </button>
+
+        <div class="text-center">
+          <h4 class="text-sm text-orange-400 font-semibold mb-1">VOTER</h4>
+          <h3 class="text-xl font-semibold text-orange-300">{{ voter.name }}</h3>
+          <p class="text-gray-400">ID: {{ voter.id }}</p>
+          <p class="text-gray-500 text-sm">State: {{ voter.state }}</p>
+        </div>
+
+        <div *ngIf="selectedVoterId === voter.id" class="text-center mt-3">
+          <p class="text-green-400 font-semibold">✔ Selected</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Voter Pagination (under cards) -->
+    <div class="flex justify-center gap-3 mt-4">
+      <button (click)="prevVoterPage()" [disabled]="voterPage === 1"
+              class="py-1 py-1 rounded">
+    <---
+      </button>
+
+      <span class="text-orange-400 font-bold">{{ voterPage }} / {{ voterTotalPages || 1 }}</span>
+
+      <button (click)="nextVoterPage()" [disabled]="voterPage >= voterTotalPages"
+              class="py-1 py-1 rounded ">
+        --->
+      </button>
+    </div>
+  </div>
+
+  <!-- =======================
+       CANDIDATE SEARCH + CARDS
+  ======================= -->
+  <div class="max-w-6xl mx-auto">
+    <h2 class="text-2xl text-orange-400 font-bold mb-3">Candidates</h2>
+
+    <!-- Search -->
+    <input type="text"
+           [(ngModel)]="candidateSearch"
+           (input)="filterCandidates()"
+           placeholder="Search candidate by name..."
+           class="w-full md:w-1/2 mb-4 p-2 rounded bg-gray-800 border border-orange-600 text-white">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-4">
+      <div *ngFor="let candidate of paginatedCandidates"
+           (click)="onCandidateSelect(candidate.id)"
+           [class.border-orange-500]="selectedCandidateId === candidate.id"
+           class="bg-gray-900 p-5 rounded-xl border border-orange-700 hover:border-orange-500
+                  hover:shadow-lg hover:shadow-orange-500/50 transition-all duration-300 cursor-pointer group relative">
+
+        <!-- Delete -->
+        <button (click)="onDelete(candidate.id); $event.stopPropagation()"
+                class="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg text-sm shadow">
+          Delete
+        </button>
+
+        <div class="text-center">
+          <h4 class="text-sm text-orange-400 font-semibold mb-1">CANDIDATE</h4>
+
+          <img [src]="candidate.symbol"
+               alt="Symbol"
+               class="w-20 h-20 mx-auto mb-4 rounded-full border-4 border-orange-500 group-hover:scale-110 transition-transform duration-300">
+
+          <h3 class="text-xl font-semibold text-orange-400">{{ candidate.name }}</h3>
+          <p class="text-gray-400">{{ candidate.party?.name }}</p>
+          <p class="text-gray-500 text-sm">State: {{ candidate.state }}</p>
+        </div>
+
+        <!-- READ MORE BUTTON -->
+        <div class="text-center mt-4">
+          <button (click)="openModal(candidate); $event.stopPropagation()"
+                  class="px-4 py-2 text-sm bg-orange-600 hover:bg-orange-700 rounded-lg">
+            Read More
+          </button>
+        </div>
+
+        <div *ngIf="selectedCandidateId === candidate.id" class="text-center mt-3">
+          <p class="text-green-400 font-semibold">✔ Selected</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Candidate Pagination (under cards) -->
+    <div class="flex justify-center gap-3 mt-4">
+      <button (click)="prevCandidatePage()" [disabled]="candidatePage === 1"
+              class="px-1 py-1  rounded ">
+        <---
+      </button>
+
+      <span class="text-orange-400 font-bold">{{ candidatePage }} / {{ candidateTotalPages || 1 }}</span>
+
+      <button (click)="nextCandidatePage()" [disabled]="candidatePage >= candidateTotalPages"
+              class="px-1 py-1  rounded ">
+        --->
+      </button>
+    </div>
+  </div>
+
+  <!-- =======================
+       SUBMIT VOTE
+  ======================= -->
+  <div class="text-center mt-10 max-w-6xl mx-auto">
+    <button (click)="castVote()"
+            [disabled]="hasVoted"
+            [ngClass]="{
+              'bg-gray-500 cursor-not-allowed': hasVoted,
+              'bg-orange-600 hover:bg-orange-700 hover:scale-105': !hasVoted
+            }"
+            class="text-black px-8 py-3 rounded-xl font-bold transition-all duration-300">
+      {{ hasVoted ? 'Vote Already Cast' : 'Submit Vote' }}
+    </button>
+
+    <div class="mt-4 text-lg text-orange-400 font-medium">{{ message }}</div>
+  </div>
+
+</section>
+
+<!-- =======================
+     MODAL (READ MORE)
+======================= -->
+<div *ngIf="showModal"
+     class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+  <div class="bg-gray-900 rounded-2xl p-8 w-96 shadow-xl border border-orange-600">
+    <h2 class="text-2xl font-bold text-orange-400 text-center mb-4">
+      {{ modalData?.name }}
+    </h2>
+
+    <img [src]="modalData?.symbol"
+         class="w-32 h-32 mx-auto rounded-full border-4 border-orange-500 mb-4">
+
+    <p class="text-gray-300"><b>Party:</b> {{ modalData?.party?.name }}</p>
+    <p class="text-gray-300"><b>State:</b> {{ modalData?.state }}</p>
+    <p class="text-gray-300"><b>Constituency:</b> {{ modalData?.constituency }}</p>
+    <p class="text-gray-300"><b>Age:</b> {{ modalData?.age }}</p>
+    <p class="text-gray-300"><b>Education:</b> {{ modalData?.education }}</p>
+    <p class="text-gray-300"><b>Election Year:</b> {{ modalData?.electionYear }}</p>
+
+    <div class="text-center mt-6">
+      <button (click)="closeModal()"
+              class="px-5 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white">
+        Close
+      </button>
+    </div>
+  </div>
+</div>

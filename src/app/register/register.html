@@ -1,0 +1,52 @@
+<div class="min-h-screen bg-[#0f0f0f] flex justify-center items-center p-6">
+
+  <div class="flex gap-16 items-center">
+
+    <!-- LEFT SIDE IMAGE -->
+    <div class="w-[330px] h-[330px] rounded-full overflow-hidden shadow-2xl">
+      <img src="https://img.freepik.com/premium-photo/cyber-security-concept-login-user-identification-information-security-encryption-secure-access-user-s-personal-information-secure-internet-access-cybersecurity_29488-4107.jpg?semt=ais_hybrid&w=740&q=80"
+           alt="Register Image"
+           class="w-full h-full object-cover" />
+    </div>
+
+    <!-- RIGHT SIDE CARD -->
+    <div class="bg-gray-900 border-2 border-orange-500 rounded-3xl p-10 w-[360px] shadow-xl">
+
+      <h1 class="text-orange-400 text-3xl font-bold mb-8 text-center">
+        Register
+      </h1>
+
+      <!-- ✅ FORM FIXED -->
+      <form (ngSubmit)="register()">
+
+        <label class="text-orange-300 font-semibold">Username</label>
+        <input type="text" [(ngModel)]="user.username" name="username"
+          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-5 text-white" />
+
+        <label class="text-orange-300 font-semibold">Email</label>
+        <input type="email" [(ngModel)]="user.email" name="email"
+          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-5 text-white" />
+
+        <label class="text-orange-300 font-semibold">Password</label>
+        <input type="password" [(ngModel)]="user.password" name="password"
+          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-8 text-white" />
+
+        <!-- ✅ Button must be submit -->
+        <button type="submit"
+          class="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-xl mb-4">
+          Register
+        </button>
+
+        <p class="text-center text-white">
+          Already have an account?
+          <a routerLink="/login" class="text-orange-400 hover:underline">
+            Login here
+          </a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+
+</div>

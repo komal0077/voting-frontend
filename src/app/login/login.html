@@ -1,0 +1,63 @@
+
+
+
+
+
+
+
+
+
+<section class="min-h-screen flex flex-col md:flex-row items-center justify-center 
+bg-[#1c1b1b] text-white px-6">
+
+  <!-- LEFT IMAGE SECTION -->
+  <div class="md:w-1/2 flex justify-center mb-10 md:mb-0">
+    <img 
+      src="https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?w=600&auto=format&fit=crop&q=60"
+      alt="Login Image"
+      class="rounded-full shadow-2xl w-100 h-100 object-cover border-1 border-orange-600"
+    >
+  </div>
+
+  <!-- RIGHT LOGIN FORM -->
+  <div class="md:w-1/2 flex justify-center">
+    <div class="w-full max-w-md bg-gray-900 rounded-2xl p-10 shadow-2xl border border-orange-600">
+
+      <h2 class="text-3xl font-bold text-orange-500 text-center mb-8">🗳️ Login</h2>
+
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+
+        <!-- Username -->
+        <div class="mb-5">
+          <label class="block text-gray-300 mb-1" for="username">Username</label>
+          <input type="text" id="username" name="username" [(ngModel)]="user.username"
+                 required
+                 placeholder="Enter your username"
+                 class="w-full p-3 rounded-lg bg-gray-800 border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">
+        </div>
+
+        <!-- Password -->
+        <div class="mb-6">
+          <label class="block text-gray-300 mb-1" for="password">Password</label>
+          <input type="password" id="password" name="password" [(ngModel)]="user.password"
+                 required
+                 placeholder="Enter your password"
+                 class="w-full p-3 rounded-lg bg-gray-800 border border-orange-500 focus:outline-none focus:ring-2 focus:ring-orange-500">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+                [disabled]="!loginForm.form.valid"
+                class="w-full py-3 bg-orange-600 hover:bg-orange-700 rounded-xl font-bold text-black 
+                       transition-transform transform hover:scale-105">
+          Login
+        </button>
+      </form>
+
+      <p class="mt-6 text-gray-400 text-center text-sm">
+        Don't have an account?
+        <a href="/register" class="text-orange-500 hover:underline">Register here !!</a>
+      </p>
+
+    </div>
+  </div>

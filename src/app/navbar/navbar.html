@@ -1,0 +1,60 @@
+<section>
+
+<nav class="bg-black text-orange-500 shadow-lg fixed top-0 w-full z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+
+    <!-- Logo -->
+    <div class="flex items-center space-x-3">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlCHrS0LD79kDqXXNVlZMX2gqvV6E8Nsw_SQ&s"
+        alt="Voting App Logo"
+        class="h-10 w-10 rounded-full border border-orange-500"
+      />
+      <span class="text-2xl font-bold tracking-wide">eMatdaan</span>
+    </div>
+
+    <!-- NAV LINKS -->
+    <ul class="flex space-x-8 text-lg">
+
+      <!-- 👉 Logged in hone par visible -->
+      <ng-container *ngIf="auth.isLoggedIn(); else guestLinks">
+
+        <li><a routerLink="/" class="hover:text-white">Home</a></li>
+        <li><a routerLink="/vote" class="hover:text-white">Vote</a></li>
+        <li><a routerLink="/result" class="hover:text-white">Results</a></li>
+        <li><a routerLink="/history" class="hover:text-white">History</a></li>
+
+        <li>
+          <button
+            (click)="logout()"
+            class="bg-orange-500 hover:bg-orange-600 text-black px-4 py-2 rounded-lg font-semibold"
+          >
+            Logout
+          </button>
+        </li>
+
+      </ng-container>
+
+      <!-- 👉 Guest (Not Logged In) ke links -->
+      <ng-template #guestLinks>
+        <li>
+          <a routerLink="/login" class="bg-orange-500 hover:bg-orange-600 text-black px-4 py-2 rounded-lg font-semibold">
+            Login
+          </a>
+        </li>
+
+        <li>
+          <a routerLink="/register" class="border border-orange-500 hover:bg-orange-500 hover:text-black px-4 py-2 rounded-lg font-semibold">
+            Register
+          </a>
+        </li>
+      </ng-template>
+
+    </ul>
+  </div>
+</nav>
+
+<div class="h-20"></div>
+
+</section>
+

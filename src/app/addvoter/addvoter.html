@@ -1,0 +1,45 @@
+
+
+
+<div class="bg-black min-h-screen flex items-center justify-center p-8">
+  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <!-- Voter Form Card -->
+    <section class="bg-gray-900 p-10 rounded-2xl text-white shadow-2xl">
+      <h2 class="text-4xl font-bold text-center text-orange-500 mb-8">Add Voter</h2>
+
+      <form (ngSubmit)="addVoter()" class="space-y-5">
+        <input [(ngModel)]="voter.name" name="name" placeholder="Full Name"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <input [(ngModel)]="voter.age" name="age" placeholder="Age" type="number"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <input [(ngModel)]="voter.gender" name="gender" placeholder="Gender"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <input [(ngModel)]="voter.state" name="state" placeholder="State"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <input [(ngModel)]="voter.constituency" name="constituency" placeholder="Constituency"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <input [(ngModel)]="voter.email" name="email" placeholder="Email Address" type="email"
+               class="w-full p-3 bg-gray-800 border border-orange-500 rounded-lg focus:ring-2 focus:ring-orange-400 focus:outline-none" required>
+
+        <button type="submit"
+                class="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white font-semibold py-3 rounded-xl transition duration-300 shadow-lg">
+          ➕ Add Voter
+        </button>
+      </form>
+    </section>
+
+    <!-- Image Card -->
+    <section class="flex items-center justify-center">
+      <img [src]="'https://kreditbee.in/blog/content/images/2024/09/Blog-Image_Sept_20_How-to-Register-to-Vote-in-India.png'"
+           alt="Voter Image"
+           class="w-96 h-96 md:w-[28rem] md:h-[28rem] object-cover rounded-full shadow-2xl ring-4 ring-orange-500">
+    </section>
+
+  </div>
+</div>
