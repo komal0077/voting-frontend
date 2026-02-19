@@ -17,27 +17,17 @@ import { authGuard} from './auth-guard';
 
 
 export const routes: Routes = [
-  { path: "", component: Home, canActivate: [authGuard] },
-
-  { path: "add-candidate", component: AddCandidate, canActivate: [authGuard] },
-
-  { path: "add-voter", component: AddVoter, canActivate: [authGuard] },
-
-  {
-    path: "add-party",
-    loadComponent: () => import('./addparty/addparty').then(m => m.AddParty),
-    canActivate: [authGuard]
-  },
-{
-  path:"home",component:Home
-},
-  { path: "vote", component: Voting, canActivate: [authGuard] },
-
-  { path: "result", component: Result, canActivate: [authGuard] },
-
-  { path: "history", component: History, canActivate: [authGuard] },
-
-  // PUBLIC ROUTES
+ // ⭐ PUBLIC ROUTES (NO LOGIN REQUIRED)
+  { path: "", component: Home },
+  { path: "home", component: Home },
   { path: "login", component: Login },
   { path: "register", component: Register },
+
+  // 🔒 PROTECTED ROUTES (LOGIN REQUIRED)
+  { path: "add-candidate", component: AddCandidate, canActivate: [authGuard] },
+  { path: "add-voter", component: AddVoter, canActivate: [authGuard] },
+  { path: "add-party", component: AddParty, canActivate: [authGuard] },
+  { path: "vote", component: Voting, canActivate: [authGuard] },
+  { path: "result", component: Result, canActivate: [authGuard] },
+  { path: "history", component: History, canActivate: [authGuard] },
 ];
