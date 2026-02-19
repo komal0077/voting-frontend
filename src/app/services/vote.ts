@@ -1,22 +1,20 @@
-
-
-
-
-
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Vote {
 
-  private candidateUrl = 'http://localhost:8080/api/candidates';
-  private voterUrl = 'http://localhost:8080/api/voters';
-  private voteUrl = 'http://localhost:8080/api/vote';
-  private partyUrl = 'http://localhost:8080/api/parties';
-  private historyUrl = 'http://localhost:8080/api/history';
+  private baseUrl = environment.apiUrl;
+
+  private candidateUrl = `${this.baseUrl}/api/candidates`;
+  private voterUrl = `${this.baseUrl}/api/voters`;
+  private voteUrl = `${this.baseUrl}/api/vote`;
+  private partyUrl = `${this.baseUrl}/api/parties`;
+  private historyUrl = `${this.baseUrl}/api/history`;
 
   constructor(private http: HttpClient) {}
 
@@ -45,15 +43,15 @@ export class Vote {
   }
 
   getWinner(): Observable<any> {
-    return this.http.get("http://localhost:8080/api/results/winner");
+    return this.http.get(`${this.baseUrl}/api/results/winner`);
   }
 
   getCandidateResults(): Observable<any[]> {
-    return this.http.get<any[]>("http://localhost:8080/api/results/candidates");
+    return this.http.get<any[]>(`${this.baseUrl}/api/results/candidates`);
   }
 
   getPartyResults(): Observable<any[]> {
-    return this.http.get<any[]>("http://localhost:8080/api/results/parties");
+    return this.http.get<any[]>(`${this.baseUrl}/api/results/parties`);
   }
 
   addParty(party: any): Observable<any> {
@@ -69,10 +67,6 @@ export class Vote {
       responseType: 'text'
     });
   }
-
-  // ==========================
-  // ✔✔ HISTORY ENDPOINTS
-  // ==========================
 
   saveHistory(year: string, state: string): Observable<string> {
     return this.http.post(
