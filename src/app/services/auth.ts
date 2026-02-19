@@ -1,12 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
 
-  private baseUrl = "http://localhost:8080/api/auth";
+  private baseUrl = `${environment.apiUrl}/api/auth`;
 
   constructor(private http: HttpClient) {}
 
@@ -19,15 +20,15 @@ export class Auth {
   }
 
   saveToken(token: string) {
-    localStorage.setItem("token", token);  // SAME KEY
+    localStorage.setItem("token", token);
   }
 
   getToken() {
-    return localStorage.getItem("token");  // SAME KEY
+    return localStorage.getItem("token");
   }
 
   isLoggedIn() {
-    const token = localStorage.getItem("token"); // SAME KEY
+    const token = localStorage.getItem("token");
     return !!token;
   }
 
@@ -35,4 +36,3 @@ export class Auth {
     localStorage.removeItem("token");
   }
 }
-
