@@ -1,50 +1,78 @@
-<div class="min-h-screen bg-[#0f0f0f] flex justify-center items-center p-6">
+<div class="min-h-screen bg-[#0f0f0f] flex items-center justify-center px-4 py-10">
 
-  <div class="flex gap-16 items-center">
+  <div class="max-w-5xl w-full grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
 
-    <!-- LEFT SIDE IMAGE -->
-    <div class="w-[330px] h-[330px] rounded-full overflow-hidden shadow-2xl">
-      <img src="https://img.freepik.com/premium-photo/cyber-security-concept-login-user-identification-information-security-encryption-secure-access-user-s-personal-information-secure-internet-access-cybersecurity_29488-4107.jpg?semt=ais_hybrid&w=740&q=80"
-           alt="Register Image"
-           class="w-full h-full object-cover" />
+    <!-- LEFT IMAGE -->
+    <div class="flex justify-center">
+      <div class="w-52 h-52 sm:w-64 sm:h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl border-4 border-orange-500">
+        <img
+          src="https://img.freepik.com/premium-photo/cyber-security-concept-login-user-identification-information-security-encryption-secure-access-user-s-personal-information-secure-internet-access-cybersecurity_29488-4107.jpg?semt=ais_hybrid&w=740&q=80"
+          alt="Register Image"
+          class="w-full h-full object-cover"
+        />
+      </div>
     </div>
 
-    <!-- RIGHT SIDE CARD -->
-    <div class="bg-gray-900 border-2 border-orange-500 rounded-3xl p-10 w-[360px] shadow-xl">
+    <!-- REGISTER CARD -->
+    <div class="bg-gray-900 border border-orange-500 rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl hover:shadow-orange-500/30 transition-all">
 
-      <h1 class="text-orange-400 text-3xl font-bold mb-8 text-center">
+      <h1 class="text-orange-400 text-2xl sm:text-3xl font-bold mb-8 text-center">
         Register
       </h1>
 
-      <!-- ✅ FORM FIXED -->
-      <form (ngSubmit)="register()">
+      <form (ngSubmit)="register()" class="space-y-5">
 
-        <label class="text-orange-300 font-semibold">Username</label>
-        <input type="text" [(ngModel)]="user.username" name="username"
-          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-5 text-white" />
+        <!-- USERNAME -->
+        <div>
+          <label class="text-orange-300 font-semibold block mb-1">Username</label>
+          <input
+            type="text"
+            [(ngModel)]="user.username"
+            name="username"
+            class="w-full bg-gray-800 border border-orange-500 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
-        <label class="text-orange-300 font-semibold">Email</label>
-        <input type="email" [(ngModel)]="user.email" name="email"
-          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-5 text-white" />
+        <!-- EMAIL -->
+        <div>
+          <label class="text-orange-300 font-semibold block mb-1">Email</label>
+          <input
+            type="email"
+            [(ngModel)]="user.email"
+            name="email"
+            class="w-full bg-gray-800 border border-orange-500 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
-        <label class="text-orange-300 font-semibold">Password</label>
-        <input type="password" [(ngModel)]="user.password" name="password"
-          class="w-full bg-transparent border border-orange-500 rounded-xl p-3 mb-8 text-white" />
+        <!-- PASSWORD -->
+        <div>
+          <label class="text-orange-300 font-semibold block mb-1">Password</label>
+          <input
+            type="password"
+            [(ngModel)]="user.password"
+            name="password"
+            class="w-full bg-gray-800 border border-orange-500 rounded-xl p-3 text-white focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
-        <!-- ✅ Button must be submit -->
-        <button type="submit"
-          class="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-xl mb-4">
+        <!-- REGISTER BUTTON -->
+        <button
+          type="submit"
+          class="w-full bg-orange-500 hover:bg-orange-600 text-black font-bold py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+        >
           Register
         </button>
 
-        <p class="text-center text-white">
+        <!-- LOGIN LINK -->
+        <p class="text-center text-gray-300 text-sm">
           Already have an account?
-          <a routerLink="/login" class="text-orange-400 hover:underline">
+          <a routerLink="/login" class="text-orange-400 hover:underline ml-1">
             Login here
           </a>
         </p>
 
       </form>
+
     </div>
 
   </div>

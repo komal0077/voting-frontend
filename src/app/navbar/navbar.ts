@@ -1,16 +1,5 @@
 
 
-
-
-
-
-
-
-
-
-
-
-
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Auth } from '../services/auth';
@@ -34,6 +23,7 @@ export class Navbar {
       document.body.classList.add('dark-theme');
     }
   }
+  isMenuOpen = false;
 
   toggleTheme() {
     this.isDark = !this.isDark;
