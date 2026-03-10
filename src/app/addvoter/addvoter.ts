@@ -1,6 +1,5 @@
 
 
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -15,6 +14,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./addvoter.css']
 })
 export class AddVoter {
+
   voter = {
     name: '',
     email: '',
@@ -28,33 +28,61 @@ export class AddVoter {
   constructor(private voteService: Vote, private router: Router) {}
 
   addVoter() {
+
     this.voteService.addVoter(this.voter).subscribe({
+
       next: () => {
+
         Swal.fire({
           title: 'Voter Added!',
           text: 'What to proceed further?',
           icon: 'success',
+
           showCancelButton: true,
+
           confirmButtonText: 'Go to Voting',
-          cancelButtonText: 'Add Another Voter'
-        }).then((res) => {
+          cancelButtonText: 'Add Another Voter',
+
+          customClass: {
+            confirmButton: 'swal-confirm-btn',
+            cancelButton: 'swal-cancel-btn'
+          },
+
+          buttonsStyling: false
+        })
+
+        .then((res) => {
+
           if (res.isConfirmed) {
             this.router.navigate(['/vote']);
           } else {
             this.voter = {
-              name: '', email: '', password: '',
-              age: null, gender: '', state: '', constituency: ''
+              name: '',
+              email: '',
+              password: '',
+              age: null,
+              gender: '',
+              state: '',
+              constituency: ''
             };
           }
+
         });
+
       },
+
       error: () => {
+
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Failed to add voter.'
         });
+
       }
+
     });
+
   }
+
 }

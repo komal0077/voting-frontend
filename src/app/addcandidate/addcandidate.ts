@@ -10,13 +10,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-addandidate',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './addcandidate.html',
   styleUrls: ['./addcandidate.css']
 })
 export class AddCandidate {
 
-  parties:any[]=[];
+  parties: any[] = [];
 
   candidate = {
     name: '',
@@ -28,52 +28,85 @@ export class AddCandidate {
     education: '',
     symbol: '',
     resultStatus: 'PENDING',
-    partyId:null
+    partyId: null
   };
 
   constructor(private voteService: Vote, private router: Router) {}
 
   ngOnInit() {
-    this.voteService.getParties().subscribe((data)=>{
-      this.parties=data;
+    this.voteService.getParties().subscribe((data) => {
+      this.parties = data;
     });
   }
 
   addCandidate() {
+
     this.voteService.addCandidate(this.candidate).subscribe({
+
       next: () => {
+
         Swal.fire({
           title: 'Candidate Added!',
           text: 'What to proceed further?',
           icon: 'success',
+
           showDenyButton: true,
           showCancelButton: true,
+
           confirmButtonText: 'Add Voter',
           denyButtonText: 'Add Another Candidate',
-          cancelButtonText: 'Go to Voting'
-        }).then((res) => {
+          cancelButtonText: 'Go to Voting',
+
+          customClass: {
+            confirmButton: 'swal-confirm-btn',
+            denyButton: 'swal-deny-btn',
+            cancelButton: 'swal-cancel-btn'
+          },
+
+          buttonsStyling: false
+        })
+
+        .then((res) => {
+
           if (res.isConfirmed) {
             this.router.navigate(['/add-voter']);
           }
+
           else if (res.isDenied) {
             this.candidate = {
-              name: '', age: null, gender: '', state: '', constituency: '',
-              electionYear: null, education: '', symbol: '', resultStatus: 'PENDING',
-              partyId:null
+              name: '',
+              age: null,
+              gender: '',
+              state: '',
+              constituency: '',
+              electionYear: null,
+              education: '',
+              symbol: '',
+              resultStatus: 'PENDING',
+              partyId: null
             };
           }
+
           else {
             this.router.navigate(['/vote']);
           }
+
         });
+
       },
+
       error: () => {
+
         Swal.fire({
           icon: 'error',
           title: 'Error',
           text: 'Failed to add candidate.'
         });
+
       }
+
     });
+
   }
+
 }
