@@ -57,15 +57,21 @@ export class AddParty {
 
       error: () => {
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to add party.'
-        });
+       Swal.fire({
+                 icon: 'error',
+                 title: 'Error',
+                 text: 'Failed to add party.',
 
-      }
+                 confirmButtonText: 'OK',
 
-    });
+                 customClass: {
+                   confirmButton: 'swal-confirm-btn',
+                 },
+
+                 buttonsStyling: false,
+               });
+             },
+           });
 
   }
 

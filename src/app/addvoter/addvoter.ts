@@ -1,5 +1,3 @@
-
-
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import Swal from 'sweetalert2';
@@ -11,10 +9,9 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './addvoter.html',
-  styleUrls: ['./addvoter.css']
+  styleUrls: ['./addvoter.css'],
 })
 export class AddVoter {
-
   voter = {
     name: '',
     email: '',
@@ -22,17 +19,17 @@ export class AddVoter {
     age: null,
     gender: '',
     state: '',
-    constituency: ''
+    constituency: '',
   };
 
-  constructor(private voteService: Vote, private router: Router) {}
+  constructor(
+    private voteService: Vote,
+    private router: Router,
+  ) {}
 
   addVoter() {
-
     this.voteService.addVoter(this.voter).subscribe({
-
       next: () => {
-
         Swal.fire({
           title: 'Voter Added!',
           text: 'What to proceed further?',
@@ -45,44 +42,44 @@ export class AddVoter {
 
           customClass: {
             confirmButton: 'swal-confirm-btn',
-            cancelButton: 'swal-cancel-btn'
+            cancelButton: 'swal-cancel-btn',
           },
 
-          buttonsStyling: false
+          buttonsStyling: false,
         })
 
-        .then((res) => {
-
-          if (res.isConfirmed) {
-            this.router.navigate(['/vote']);
-          } else {
-            this.voter = {
-              name: '',
-              email: '',
-              password: '',
-              age: null,
-              gender: '',
-              state: '',
-              constituency: ''
-            };
-          }
-
-        });
-
+          .then((res) => {
+            if (res.isConfirmed) {
+              this.router.navigate(['/vote']);
+            } else {
+              this.voter = {
+                name: '',
+                email: '',
+                password: '',
+                age: null,
+                gender: '',
+                state: '',
+                constituency: '',
+              };
+            }
+          });
       },
 
       error: () => {
-
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Failed to add voter.'
+          text: 'Failed to add voter.',
+
+          confirmButtonText: 'OK',
+
+          customClass: {
+            confirmButton: 'swal-confirm-btn',
+          },
+
+          buttonsStyling: false,
         });
-
-      }
-
+      },
     });
-
   }
-
 }

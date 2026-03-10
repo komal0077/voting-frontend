@@ -97,15 +97,21 @@ export class AddCandidate {
 
       error: () => {
 
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Failed to add candidate.'
-        });
+       Swal.fire({
+                 icon: 'error',
+                 title: 'Error',
+                 text: 'Failed to add candidate.',
 
-      }
+                 confirmButtonText: 'OK',
 
-    });
+                 customClass: {
+                   confirmButton: 'swal-confirm-btn',
+                 },
+
+                 buttonsStyling: false,
+               });
+             },
+           });
 
   }
 
