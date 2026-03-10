@@ -30,30 +30,25 @@ export class AddParty {
           title: 'Party Added!',
           text: 'What to proceed further?',
           icon: 'success',
-
           showCancelButton: true,
 
           confirmButtonText: 'Add Candidate',
           cancelButtonText: 'Add Another Party',
 
-          confirmButtonColor: '#f97316',  // orange button
-          cancelButtonColor: '#374151',   // gray button
+          customClass: {
+            confirmButton: 'swal-confirm-btn',
+            cancelButton: 'swal-cancel-btn'
+          },
 
-          background: '#1f2937',          // dark popup background
-          color: '#ffffff'                // white text
+          buttonsStyling: false
         })
 
         .then((res) => {
 
           if (res.isConfirmed) {
             this.router.navigate(['/add-candidate']);
-          }
-          else {
-            this.party = {
-              name: '',
-              leader: '',
-              symbol: ''
-            };
+          } else {
+            this.party = { name: '', leader: '', symbol: '' };
           }
 
         });
@@ -65,10 +60,7 @@ export class AddParty {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: 'Failed to add party.',
-          confirmButtonColor: '#ef4444',
-          background: '#1f2937',
-          color: '#ffffff'
+          text: 'Failed to add party.'
         });
 
       }
